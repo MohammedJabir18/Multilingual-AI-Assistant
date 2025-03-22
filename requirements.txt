@@ -1,5 +1,6 @@
 SpeechRecognition
 google-generativeai
+PyAudio
 gTTS
 pipwin
 streamlit
