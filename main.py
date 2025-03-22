@@ -26,9 +26,10 @@ def log_info(msg):
 
 # Speech recognition function
 def takeCommand():
+    # Initialize recognizer
     r = sr.Recognizer()
 
-    # List of supported languages
+    # Supported language with ISO codes
     languages = {
         "English": "en-IN",
         "Hindi": "hi-IN",
@@ -36,28 +37,24 @@ def takeCommand():
         "Tamil": "ta-IN"
     }
 
-    try:
-        with sr.Microphone() as source:
-            print("Listening...")
-            r.pause_threshold = 1
-            r.adjust_for_ambient_noise(source)
-            audio = r.listen(source)
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        r.adjust_for_ambient_noise(source)
+        audio = r.listen(source)
 
+        # Try recognizing in multiple languages
         for lang, code in languages.items():
             try:
-                print("Recognizing...")
+                print("Recognizing... ")
                 query = r.recognize_google(audio, language=code)
                 print(f"You said: {query}")
                 return query
-            except sr.UnknownValueError:
-                print(f"Could not understand {lang}")
-            except sr.RequestError:
-                print("Google Speech Recognition API unavailable")
-        
-        return "Sorry! I did not catch that."
 
-    except Exception as e:
-        return "Microphone is not available. Please use text input."
+            except Exception as e:
+                log_info(f"Error recognizing: {str(e)}")
+            
+        return "Sorry! I did not catch that"
  
 
 # Text-to-speech function
