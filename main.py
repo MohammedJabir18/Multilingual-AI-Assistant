@@ -74,7 +74,7 @@ def text_to_speech(text):
 # Gemini AI Model function
 def gemini_model(user_input):
     # Configure API key
-    genai.configure(api_key="AIzaSyBoH0fpSEQQtl8LKcTpn6kzA_R7w7UJ5Z4")  # Replace with valid API key
+    genai.configure(api_key="Give your API Key here")  # Replace with valid API key
     
     try:
         print("Generating response...")
